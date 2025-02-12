@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -13,24 +14,20 @@ import java.util.List;
 @Entity
 @Table
 public class Enrollment {
-
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "student_enrollment",
-            joinColumns = @JoinColumn(name = "enrollment_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private List<StudentProfile>  student;
+    @ManyToMany(mappedBy = "enrollments")
+    private List<StudentProfile> students;
+
     @ManyToMany
     @JoinTable(
             name = "course_enrollment",
             joinColumns = @JoinColumn(name = "enrollment_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Course> course;
-
-
-
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
+    @ManyToMany(mappedBy = "students")
+    private Set<Enrollment> enrollments;
 }

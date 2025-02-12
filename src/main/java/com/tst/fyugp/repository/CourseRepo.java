@@ -10,7 +10,4 @@ import java.util.List;
 public interface CourseRepo extends JpaRepository<Course,Long> {
 
 
-    List<Course> id(Long id);
-
-    List<Course> id(Long id);
 }

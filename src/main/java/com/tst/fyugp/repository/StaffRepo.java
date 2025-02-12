@@ -1,11 +1,9 @@
 package com.tst.fyugp.repository;
 
-import com.tst.fyugp.model.Department;
+import com.tst.fyugp.model.Staff;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DepartmentRepo extends JpaRepository<Department,Long> {
-
-
+public interface StaffRepo extends JpaRepository<Staff, Long> {
 }

@@ -13,15 +13,19 @@ import java.util.List;
 @AllArgsConstructor
 public class University {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String universityName;
+    @Column(nullable = false, unique = true)
     private String universityCode;
     private String universityDescription;
     private String universityLocation;
     private String universityEmail;
     private String universityPhone;
     private String universityWebsite;
-    @OneToMany
-    private List<College>  college;
+    @OneToMany(mappedBy = "university", cascade = CascadeType.ALL)
+    private List<College> colleges;
+
 }

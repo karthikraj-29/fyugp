@@ -12,15 +12,27 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Staff {
-
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String staffId;
-    private String firstName;
-    private String lastName;
+
+
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToMany
-    private List<StaffType> staffType;
+    @JoinTable(
+            name = "staff_staffType",
+            joinColumns = @JoinColumn(name = "staff_id"),
+            inverseJoinColumns = @JoinColumn(name = "staffType_id")
+    )
+    private List<StaffType> staffTypes;
+
 
 }
+

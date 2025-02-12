@@ -12,22 +12,21 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Programme {
-
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private  Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private String programmeName;
+
+    @Column(nullable = false, unique = true)
     private String programmeCode;
     private String programmeDescription;
     private String programmeDuration;
     private String programmeType;
     private String programmeMode;
-    @ManyToMany
-    @JoinTable(
-            name = "programme_department",
-            joinColumns = @JoinColumn(name = "programme_id"),
-            inverseJoinColumns = @JoinColumn(name = "department_id"))
-    private List<Department>  department; ;
 
+    @ManyToMany(mappedBy = "programmes")
+    private List<Department> departments;
 
 }

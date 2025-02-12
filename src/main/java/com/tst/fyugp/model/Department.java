@@ -13,19 +13,26 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Department {
-
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String departmentName;
+
+    @Column(nullable = false, unique = true)
     private String departmentCode;
+
+    @ManyToOne
+    @JoinColumn(name = "college_id", nullable = false)
+    private College college;
+
     @ManyToMany
-    private List<Course> course;
-    @ManyToMany
-    private List<Staff> staff;
-    @ManyToMany
-    private List<StudentProfile> student;
-    @ManyToMany
-    private List<Programme> programme;
+    @JoinTable(
+            name = "programme_department",
+            joinColumns = @JoinColumn(name = "department_id"),
+            inverseJoinColumns = @JoinColumn(name = "programme_id")
+    )
+    private List<Programme> programmes;
 
 }

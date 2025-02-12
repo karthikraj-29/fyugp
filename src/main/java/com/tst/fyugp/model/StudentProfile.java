@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Entity
@@ -13,26 +12,31 @@ import java.util.List;
 @Data
 public class StudentProfile {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
     private String registrationNumber;
-    private String firstName;
-    private String lastName;
-    @ManyToOne
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     @ManyToMany
     @JoinTable(
             name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Course>  course;
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> courses;
 
     @ManyToMany
-    private List<Enrollment> enrollment;
-    @ManyToMany
-    private List<Department> department;
-    @ManyToMany
-    private List<Programme> programme;
-
+    @JoinTable(
+            name = "student_enrollment",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "enrollment_id")
+    )
+    private List<Enrollment> enrollments;
 
 }
+

@@ -13,21 +13,21 @@ import java.util.List;
 @NoArgsConstructor
 public class Course {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String courseName;
-    private String courseCode;
-    private String courseDescription;
-    private int creditUnit;
-    private int semester;
-    @ManyToMany
-    @JoinTable(
-            name = "student_course",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "department_id"))
-    private List <Department>  department;
-    @ManyToMany
-    private List<StudentProfile> student;
 
+    @Column(nullable = false)
+    private String courseName;
+
+    @Column(nullable = false, unique = true)
+    private String courseCode;
+
+    private String courseDescription;
+    private Integer creditUnit;
+    private Integer semester;
+
+    @ManyToMany(mappedBy = "courses")
+    private List<StudentProfile> students;
 }
+
 

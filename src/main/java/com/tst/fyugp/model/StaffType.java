@@ -13,17 +13,11 @@ import java.util.List;
 @Entity
 @Table
 public class StaffType {
-
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String staffType;
-    @ManyToMany
-    @JoinTable(
-            name = "staff_staffType",
-            joinColumns = @JoinColumn(name = "staffType_id"),
-            inverseJoinColumns = @JoinColumn(name = "staff_id"))
-    private List<Staff> staff;
 
+    @Column(nullable = false, unique = true)
+    private String staffType;
 
 }
