@@ -1,0 +1,16 @@
+package com.tst.fyugp.model;
+
+public enum RoleName {
+    ROLE_ADMIN,
+    ROLE_USER,
+    ROLE_STUDENT,
+    ROLE_TEACHER,
+    ROLE_HOD,
+    ROLE_PRINCIPAL,
+    ROLE_ADVISOR,
+    ROLE_PRINCIPAL_OFFICE,
+    ROLE_ACCOUNTANT,
+    ROLE_LIBRARIAN,
+    ROLE_UNIVERSITY_ADMIN,
+    ROLE_UNIVERSITY_ADVISOR
+}
